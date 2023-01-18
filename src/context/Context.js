@@ -1,7 +1,10 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthReducer from "./Reducer";
-import { loginCall } from "../../ApiCalls";
+import { loginCall, saveFirebaseToken } from "../../ApiCalls";
+
+import messaging, { firebase } from '@react-native-firebase/messaging';
+
 // initial state
 const INITIAL_STATE = {
   user: null,
@@ -32,6 +35,10 @@ export const ContextProvider = ({ children }) => {
       const user = await loginCall({ adharNo, password }, userType)
       storeData(user)
       setUser(user)
+      if (userType === 'user') {
+        const firebaseToken =await  messaging().getToken()
+        await saveFirebaseToken(firebaseToken,user.sector,userType)
+      }
     } catch (error) {
       console.log(error)
     }

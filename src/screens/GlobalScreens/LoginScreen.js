@@ -2,6 +2,8 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, StatusBar, ScrollV
 import CustomButton from '../../Components/CustomButton'
 import { useContext, useState } from 'react';
 import { Context } from '../../context/Context';
+
+import messaging from '@react-native-firebase/messaging';
 export default function LoginScreen({ navigation, route }) {
     const [adharNo, setAdharNo] = useState(null)
     const [password, setPassword] = useState(null)
@@ -11,6 +13,7 @@ export default function LoginScreen({ navigation, route }) {
     const handleSubmit = async () => {
         try {
             await login(adharNo, password, userType)
+           
         } catch (error) {
             console.log(error)
         }
