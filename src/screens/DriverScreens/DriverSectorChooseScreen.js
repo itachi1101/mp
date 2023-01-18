@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import DriverSelectScreenCard from '../../Components/DriverSelectScreenCard'
 
 const DriverSectorChooseScreen = ({navigation}) => {
-    const [sectors, setSectors] = useState([1, 2, 3, 4])
+    const [sectors, setSectors] = useState([1, 20, 3, 4])
 
     return (
         <ScrollView style={styles.container} >

@@ -1,14 +1,21 @@
 import { View, Text, StyleSheet, Button, Touchable, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { getFirebaseTokens, sendNotification } from '../../ApiCalls'
 
-const DriverSelectScreenCard = ({ sector,click }) => {
-    const handlePress=async()=>{
+const DriverSelectScreenCard = ({ sector, click }) => {
+    const handlePress = async () => {
+        try {
+            const tokens = await getFirebaseTokens(sector, "user")
+            await sendNotification(tokens)
+        } catch (error) {
+            console.log("error in DriverSelectScreenCard", error)
+        }
         click()
     }
     return (
         <View style={styles.container}>
             <Text style={styles.heading11}>SECTOR:{sector}</Text>
-            <TouchableOpacity onPress={handlePress}style={styles.btn}>
+            <TouchableOpacity onPress={handlePress} style={styles.btn}>
                 <Text style={styles.btntxt}>Send Notification</Text>
             </TouchableOpacity>
         </View>

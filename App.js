@@ -15,7 +15,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Context, ContextProvider } from './src/context/Context';
 import M from './src/M';
 import { NavigationContainer } from '@react-navigation/native';
+
+
+
 export default function App() {
+  
   return (
     <ContextProvider>
       <M />
